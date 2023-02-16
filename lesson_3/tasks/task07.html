@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <!-- <p>З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься</p> -->
+
+   <script>
+
+      // Вводимо необхідні дані
+      // const winter = 1 || 2 || 12
+      // const spring = 3 || 4 || 5
+      // const summer = 6 || 7 || 8
+      // const autumn = 9 || 10 || 11
+
+      let monthsNum = prompt('Введіть номер місяця', '1')
+
+
+      //  || 
+
+
+      // Знаходимо результат
+
+      if (monthsNum < 1 || monthsNum > 12)
+         alert('В одному році 12 місяців')
+      else if (monthsNum < 3 || monthsNum == 12)
+         alert('Winter')
+      else if (monthsNum < 6)
+         alert('Spring')
+      else if (monthsNum < 9)
+         alert('Summer')
+      else
+         alert('Autumn')
+
+         // Виводимо результат
+
+   </script>
+</body>
+
+</html>

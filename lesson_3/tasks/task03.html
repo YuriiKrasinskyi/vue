@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <!-- <p>Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.</p> -->
+   <script>
+
+      // Вводимо необхідні дані
+      let minValue = 1
+      let maxValue = 5
+
+      let userNum = Math.floor(prompt('Спробуйте вгадати число від 1 до 5 за 2 спроби.', '1'))
+
+      randomNum = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue
+
+      // Знаходимо результат
+
+      if (randomNum === userNum)
+         alert('Вітаю!')
+      else
+         userNum = Math.floor(prompt('Спробуйте вгадати число від 1 до 5 за 2 спроби.Друга спроба', '1'))
+      if (randomNum === userNum)
+         alert('Вітаю, ви чемпіон!')
+      else
+         alert('Наступного разу пощастить')
+
+
+
+
+
+      // Виводимо результат
+
+   </script>
+</body>
+
+</html>

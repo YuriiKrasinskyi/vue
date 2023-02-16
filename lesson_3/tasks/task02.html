@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <!-- <p>З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не вистачає то відмовляємо у покупці,
+      інакше, якщо ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.
+   </p> -->
+   <script>
+
+      // Вводимо необхідні дані
+
+      let price = parseFloat(prompt('Введіть вартість товару', '1'))
+      let amountMoney = parseInt(prompt('Введіть кількість грошей', '1'))
+
+      // Знаходимо результат
+
+      if (price > amountMoney)
+         alert('У покупці відмовлено')
+
+      else if (amountMoney % price >= 4)
+      alert('Пропонуємо купити лотерею за 4 грн.')
+      // не завжди коректно працює
+
+      else 
+       alert ('Успішно')
+
+
+
+         // Виводимо результат
+
+   </script>
+</body>
+
+</html>
