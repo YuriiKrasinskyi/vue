@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+   <!-- Задача 2. Вводиться номер місяця. Автоматично виводити рекомендований одяг (зима – пальто, літо – шорти ….).
+   Також автоматично виводити зображення з відповідним зображенням лісу (зима – ліс зі снігом, осінь – жовтий ліс, …). -->
+   <img src="" alt="">
+
+   <section id="app">
+      <h1>{{message}}</h1>
+      <label>
+         Введіть номер місяця 1-12
+         <input type="number" v-model.lazy="monthNum">
+      </label>
+      <p>Рекомендую одягнути {{getCurrentSeason()}}</p>
+      <img :src="createImageOfCurrentSeason()" :width="randWidth" height="400">
+
+   </section>
+   <script>
+      const { createApp } = Vue
+
+      const app = createApp({
+         data() {
+            return {
+               message: 'Привіт!',
+               monthNum: null,
+               randWidth: 600,
+            }
+         },
+         methods: {
+            getCurrentSeason() {
+               let result
+               switch (this.monthNum) {
+                  case 1:
+                  case 2:
+                  case 12: result = 'шапку та шарф'
+                     break;
+                  case 3:
+                  case 4:
+                  case 5: result = 'знову шапку'
+                     break;
+                  case 6:
+                  case 7:
+                  case 8: result = 'картуза для захисту від сонця'
+                     break;
+                  case 9:
+                  case 10:
+                  case 11: result = ' пальто, прийшов час дістати його з шафи'
+                     break;
+                  default: result = 'щось на себе'
+               }
+               return result
+            },
+            createImageOfCurrentSeason() {
+               let result
+               switch (this.monthNum) {
+                  case 1:
+                  case 2:
+                  case 12: result = 'img/01.jpeg'
+                     break;
+                  case 3:
+                  case 4:
+                  case 5: result = 'img/02.jpeg'
+                     break;
+                  case 6:
+                  case 7:
+                  case 8: result = 'img/03.jpeg'
+                     break;
+                  case 9:
+                  case 10:
+                  case 11: result = 'img/04.jpeg'
+                     break;
+                  default: result = 'img/05.jpeg'
+                     break;
+               }
+               return result
+            }
+         },
+      }).mount('#app')
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+   <!-- Задача 3. Задано початок та кінець діапазону. При натисканні на кнопку випадковим чином генерувати значення з
+   вказаного діапазону та відображати його. -->
+
+   <section id="app">
+      <h1>{{message}}</h1>
+      <div>
+         <label>
+            Введіть числовий початок діапазону(менше число)
+            <input type="number" name="" id="" v-model="num1">
+         </label>
+      </div>
+      <div>
+         <label>
+            Введіть числовий початок діапазону(більше число)
+            <input type="number" name="" id="" v-model="num2">
+         </label>
+      </div>
+      <p>Випадкове число зі вказаних значень = {{getRandomNumber}}</p>
+
+
+   </section>
+
+   <script>
+      const { createApp } = Vue
+
+      const app = createApp({
+         data() {
+            return {
+               message: 'Привіт, Vue!',
+               num1: null,
+               num2: null,
+            }
+         },
+         computed: {
+            getRandomNumber() {
+               return this.num1 + Math.floor(Math.random() * (this.num2 - this.num1 + 1))
+            }
+         }
+      }).mount('#app')
+   </script>
+</body>
+
+</html>

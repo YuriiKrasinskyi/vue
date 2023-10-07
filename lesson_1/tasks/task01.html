@@ -1,0 +1,64 @@
+   <!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+   <!-- Задача 1. Вводиться кількість пасажирів. Вивести:
+
+   скільки потрібно автобусів (кожен автобус на 20 місць)
+   скільки пляшок води (кожному пасажиру 2 пляшки)
+   скільки бутербродів (кожному пасажиру 3 бутерброди) -->
+
+   <section id="app">
+      <h1>{{message}}</h1>
+
+      <div>
+         <label>
+            Введіть кількість пасажирів:
+            <input type="number" v-model="passengersNum">
+         </label>
+      </div>
+      <p>Для пасажирів потрібно {{getBusesNum}} автобус, {{getWaterBottlesNum}} пляшок води, та {{getSandwichesNum}}
+         бутербродів</p>
+   </section>
+
+
+   <script>
+      const { createApp } = Vue
+
+      const busesMaxPassengersLimit = 20
+      const waterPersonLimit = 2
+      const sandwichesPersonLimit = 3
+
+      const app = createApp({
+         data() {
+            return {
+               message: 'Привіт, Vue!',
+               passengersNum: null,
+            }
+         },
+         computed: {
+            getBusesNum() {
+               return Math.ceil(this.passengersNum / busesMaxPassengersLimit)
+            },
+            getWaterBottlesNum() {
+               return this.passengersNum * waterPersonLimit
+            },
+            getSandwichesNum() {
+               return this.passengersNum * sandwichesPersonLimit
+            }
+         },
+      })
+      app.mount('#app')
+
+   </script>
+</body>
+
+</html>

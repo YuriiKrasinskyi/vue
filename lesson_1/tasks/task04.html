@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+   <!-- Задача 4. “Рахунок у банку”
+   Вимоги:
+   1) Спочатку сума дорівнює 0грн. Змінити суму у гривнях можна або зарахуванням на рахунок, або зняттям.
+   2) Сума автоматично переводиться у долари та євро (фіксований курс задається у data).
+   3) можливість зарахувати суму (контролювати, щоб не була від’ємною)
+   4) можливість зняти (щоб не можна зняти більше ніж є на рахунку)
+   5) при виконанні зняття і зарахування коштів вираховувати 3% від суми (відображати кількість відсотків автоматично)
+
+   При зміні суми :
+   - якщо було зняття, то суму відоражати червоним
+   - якщо було зарахування, то суму відображати зеленим
+   Якщо сума валюти менша за 100 то відображати червоним кольором, інакше - зеленим -->
+
+   <section id="app">
+      <h1>{{message}}</h1>
+      <p>Сума на рахунку: <span :style="{color: createActiveColor}">{{balance}}</span> грн.</p>
+      <div>
+         <label>
+            Зарахувати на рахунок:
+            <input type="number" v-model.lazy="addOnAccountBalance">
+         </label>
+         <button @click="getBalanceSum">Зарахувати</button>
+      </div>
+      <div>
+         <label>
+            Зняти з рахунку:
+            <input type="number" v-model.lazy="withdrawFromAccountBalance">
+         </label>
+         <button @click="getWithdrawBalance">Зняти</button>
+      </div>
+      <p>Відсотки за обслуговування {{tax}} грн.</p>
+      <hr>
+      <p> Сума в доларах: $ {{euroSum}}</p>
+      <p> Сума в євро: Є {{dollarSum}}</p>
+
+      </div>
+   </section>
+   <script>
+      const { createApp } = Vue
+      const taxPercentage = 0.03
+      const redColor = 'red'
+      const greenColor = 'green'
+
+      const app = createApp({
+         data() {
+            return {
+               message: 'Привіт!',
+               balance: 0,
+               euroCourse: 38.68,
+               addOnAccountBalance: null,
+               withdrawFromAccountBalance: null,
+            }
+         },
+         methods: {
+            getBalanceSum() {
+               if (this.addOnAccountBalance > 0)
+                  parseInt(this.balance += this.addOnAccountBalance)
+               this.addOnAccountBalance = 0
+            },
+            getWithdrawBalance() {
+               if (this.balance > 0)
+                  parseInt(this.balance -= this.withdrawFromAccountBalance)
+               this.withdrawFromAccountBalance = 0
+            },
+         },
+         computed: {
+            createActiveColor() {
+               if (this.balance < 100)
+                  return redColor
+               else return greenColor
+            },
+            tax() {
+               return (this.balance * taxPercentage).toFixed(2)
+            },
+            euroSum() {
+               return (this.balance / this.euroCourse).toFixed(2)
+            },
+            dollarSum() {
+               return (this.euroSum * 0.94).toFixed(2)
+            }
+         }
+      }).mount('#app')
+   </script>
+</body>
+
+</html>

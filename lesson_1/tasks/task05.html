@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+   <!-- Задача 5. Додаток містить масив об’єктів (логін, пароль) --  інсуючі логіни і паролі. 
+   Користувач вводить логін і пароль, а програма повідомляє чи може користувач бути авторизованим (чи є він одним з масиву). -->
+
+   <section id="app">
+      <h1>{{message}}</h1>
+      <div>
+         <label>
+            Login:
+            <input type="text" v-model="login">
+         </label>
+      </div>
+      <div>
+         <label>
+            Password:
+            <input type="password" v-model="password">
+         </label>
+      </div>
+      <button @click="getAuthorization">Go</button>
+   </section>
+
+   <script>
+      const { createApp } = Vue
+
+      const app = createApp({
+         data() {
+            return {
+               message: 'Привіт!',
+               login: null,
+               password: null,
+               userInfo: [
+                  {
+                     login: '1',
+                     password: 1111,
+                  },
+                  {
+                     login: '2',
+                     password: 2222,
+                  },
+                  {
+                     login: '3',
+                     password: 3333,
+                  },
+                  {
+                     login: '4',
+                     password: 4444,
+                  },
+               ]
+            }
+         },
+         methods: {
+            getAuthorization() {
+               this.userInfo.forEach(obj => {
+                  if (obj.login === this.login && obj.password == this.password)
+                     alert('Авторизацію виконано')
+               });
+            }
+         },
+      }).mount('#app')
+   </script>
+</body>
+
+</html>
