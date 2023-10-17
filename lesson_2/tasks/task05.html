@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <style>
+      article {
+         margin: 0px 0px 44px 28px;
+         box-shadow: 0 0 0 1px #ebedef;
+         max-width: 600px;
+      }
+   </style>
+</head>
+
+<body>
+   Задача 5. Самостійно сформуйте масив даних та виведіть фрагмент на зразок поданого
+
+   <div id="app">
+      <article v-for="(res, index) in searchResultList" :key="index">
+         <div>
+            <img :src="res.logoSrc" alt="Image" res.image>
+            <div>
+               <h3>{{res.subTitle}}</h3>
+               <a :href="res.link" target="_blank">{{res.link}}</a>
+            </div>
+         </div>
+         <h2>{{res.title}}</h2>
+         <p>{{res.text}}</p>
+      </article>
+   </div>
+
+   <script>
+      const { createApp } = Vue
+
+      const searchResult = [
+         {
+            subTitle: 'Vue.js',
+            link: 'https://vuejs.org/',
+            logoSrc: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAhFBMVEX///+44Myw3cetyL+rsbjh4+XB5NIlsnY1tX0lOVQmPlUhOlNFV2lewJI+t4FCuINCu4Q9kHQ0P1s1SV6zub/f8edDvoU2VWGDzKg/pHs0PFuLlJ4rs3k5bGg1RV0ML0rp6+0vRFpteYY7hHDT699wxZ0+mXfr9vA3X2SZ1LdAq346d2zD7XyeAAABIklEQVR4Aa3RBbaDUAxF0Vt/aCh1N+rzn99Pgua77XqBLLIO/q7VFp2u6EH19EenLVroD5zwfN8PQqgw4B+eE4M+EMVElAzT0WgUjMHGAX9Nhwn/HUcAJgNi09mIBWDBiM2mxAYTsLmTEYsl/+2vgJXPX5YLGeDmUGsdsdnygd1+v+OP7UYHrJFrOxJyF4fj8SB3QMK1USCRnLZyhhzfnhISKGVrPWNU0ePrDJWzrnpJRyq96Ipn1K75qrftiG1v+YpXNNwdscdyxJYPYu4Ow8Uy4skjtk8ZEDtY/TUJOYHEug+rSlJHsKokzQjWPF81X3EOq06SJHkEyyQxESyqwLJJbARLkmgEyybRCJZNohEsm0QifKK1XrfwqSjC57IM/+0FV60eh/8r7TcAAAAASUVORK5CYII=',
+            title: 'Vue.js - The Progressive JavaScript Framework | Vue.js',
+            text: 'Approachable. Builds on top of standard HTML, CSS and JavaScript with intuitive API and world-class documentation. · Performant. Truly reactive, compiler- ...'
+         },
+         {
+            subTitle: 'Wikipedia',
+            link: 'https://en.wikipedia.org/wiki/Vue.js',
+            logoSrc: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEUAAAD+/v41NTUBAQEAAABZWVknJycWFhaZmZmIiIjp6ellZWXMzMzX19eurq54eHhHR0dExXFyAAAAAXRSTlMAQObYZgAAAPtJREFUeAG8kAWOBDAMA9d1Sin+/7XXbpZZdBaURlMrhx28ycGCD/n0bvkBwJf8C+AoIvRAWGtMyHGtCWkfxW+DRopuuIjUtTQJDStevNoXWaRjRSllLd1O8FFhgEZx2BmkAmHC8HwpOUyxSA50VqOjXgAl50URvNWPBRcAnmwnhbcduthqQCO9KYTFBG7eDWoK1T47AZX9DuiUYT/TuhX3MGpnD51kPprSA9Dl+BCKl7jWHHEHmHsLWhNZZMxPQCLTEuy+cYF6D9i8Q5e2Lcyz4AGwKdJbX0p7AegC2qnvxAsAxQRAYH8J6Dg1a/lvpKRJinMW4cxLMPsDAJjSCaG8cPmnAAAAAElFTkSuQmCC',
+            title: 'Vue.js',
+            text: 'Vue.js is an open-source model–view–viewmodel front end JavaScript library for building user interfaces and single-page applications.'
+         },
+         {
+            subTitle: 'Википедия',
+            link: 'https://ru.wikipedia.org/wiki/Vue.js',
+            logoSrc: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEUAAAD+/v41NTUBAQEAAABZWVknJycWFhaZmZmIiIjp6ellZWXMzMzX19eurq54eHhHR0dExXFyAAAAAXRSTlMAQObYZgAAAPtJREFUeAG8kAWOBDAMA9d1Sin+/7XXbpZZdBaURlMrhx28ycGCD/n0bvkBwJf8C+AoIvRAWGtMyHGtCWkfxW+DRopuuIjUtTQJDStevNoXWaRjRSllLd1O8FFhgEZx2BmkAmHC8HwpOUyxSA50VqOjXgAl50URvNWPBRcAnmwnhbcduthqQCO9KYTFBG7eDWoK1T47AZX9DuiUYT/TuhX3MGpnD51kPprSA9Dl+BCKl7jWHHEHmHsLWhNZZMxPQCLTEuy+cYF6D9i8Q5e2Lcyz4AGwKdJbX0p7AegC2qnvxAsAxQRAYH8J6Dg1a/lvpKRJinMW4cxLMPsDAJjSCaG8cPmnAAAAAElFTkSuQmCC',
+            title: 'Vue.js',
+            text: 'Vue.js (также Vue; /v j uː/) — JavaScript-фреймворк с открытым исходным кодом для создания пользовательских интерфейсов. Легко интегрируется в проекты с ...'
+         },
+         {
+            subTitle: 'GitHub',
+            link: 'https://github.com/vuejs',
+            logoSrc: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAb1BMVEX////4+Pi3ubtvcnZNUVU+Q0cpLjLr6+x3en0sMTYkKS59gIORk5aUl5n8/Pzw8PFTV1tbX2Pc3d5DSEzn5+g3PECLjpFKTlKFh4qxs7XCxMUwNTq/wcLh4uPV1tZzd3o/Q0jOz9CmqKpjZ2qfoaSrd37mAAABPUlEQVR4AW3TBZKEMBAF0B8GCHzcnbW5/xm30qEyknklcU/DgQpuYRTHUXgLFHw6SemkmcYrlcd8kRYlnlQ1PU0Fp434Qde75Qd+1FUQKiRZjyGfTGNjKhWMmSQXYO3Ibao3MlqBnSRzADhk/ycAdcqclSSHnEUD+KLt8KalMQMqpl3izU5jKxHQGCq8Ud80fq4VfuFZaIyQO4wVPEre5g+RrIAPJrkQSL8OPjv3htQmH8guU5uwgseeP7ITMYBnpdFgvlJPcx0zoLjjzS/FDrVRvH6xsqDYlLx29huRUaFx6YuI1mhKMbddf9trEzca7rmRk/FxpiRXiJO8FDBURyb4yfO7glC8TOpacmAc4ElMEWlc2oGckjwvYVFEB5wjouE6uLBwquypQym/scKrM4njElYaJy182q15aDj/oQMZkS8JH3IAAAAASUVORK5CYII=',
+            title: 'vuejs',
+            text: 'Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.'
+         },
+      ]
+
+      const app = createApp({
+         computed: {
+            searchResultList() {
+               return searchResult
+            }
+         }
+      }).mount('#app')
+   </script>
+</body>
+
+</html>

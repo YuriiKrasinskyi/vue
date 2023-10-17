@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <style>
+      /* .selectClassBusiness {
+         background: url('img/task02/01.jpeg') 0 0 / cover no-repeat;
+         min-height: 100vh;
+      }
+
+      .selectClassEconomy {
+         background: url('img/task02/02.jpeg') 0 0 no-repeat;
+         min-height: 100vh;
+      } */
+
+
+      select {
+         position: relative;
+         z-index: 2;
+      }
+
+      img {
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         top: 0;
+         left: 0;
+         object-fit: cover;
+      }
+
+      .bonus {
+         position: relative;
+         z-index: 2;
+      }
+   </style>
+
+</head>
+
+<body class="defaultBackgroundColor">
+   Задача 2. З випадаючого списку вибираємо клас квитка у літаку. Якщо
+   1) бізнес - виводимо елементи для вибору газети та коньяку (якщо вибрано коньяк, то запропонувати закуску (так/ні)),
+   на фоні зображення бізнес кают
+   2) економ – виводимо елементи для вибору типу пива і чипсів, на фоні хмарки.
+   <div id="app">
+      <select v-model="selected">
+         <option disabled value="">Будь ласка, оберіть клас квитка</option>
+         <option>Бізнес клас</option>
+         <option>Економ клас</option>
+      </select>
+      <template v-if="isBusiness">
+         <div>
+            <img src="img/task02/01.jpeg" alt="image">
+         </div>
+         <div class="bonus">
+            <input type="checkbox" id="daily">
+            <label for="daily">Газета</label>
+            <br>
+            <input type="checkbox" id="cognac" v-model="cognac">
+            <label for="cognac">Коньяк</label>
+            <template v-if="isCognac">
+               <div>Бажаєте закуску?</div>
+               <input type="radio" id="yes" name="snack">
+               <label for="yes">Так</label>
+               <br>
+               <input type="radio" id="no" name="snack">
+               <label for="no">Ні</label>
+            </template>
+         </div>
+      </template>
+      <template v-if="isEconomy">
+         <div>
+            <img src="img/task02/02.jpeg" alt="image">
+         </div>
+         <div class="bonus">
+            <input type="checkbox" id="beer">
+            <label for="beer">Пиво</label>
+            <br>
+            <input type="checkbox" id="chipsy">
+            <label for="chipsy">Чіпси</label>
+         </div>
+      </template>
+   </div>
+   <script>
+      const { createApp } = Vue
+
+      const app = createApp({
+         data() {
+            return {
+               selected: '',
+               cognac: '',
+            }
+         },
+         computed: {
+            isBusiness() {
+               return this.selected === 'Бізнес клас'
+            },
+            isEconomy() {
+               return this.selected === 'Економ клас'
+            },
+            isCognac() {
+               return this.cognac
+            }
+         },
+         methods: {
+         }
+      }).mount('#app')
+   </script>
+</body>
+
+</html>

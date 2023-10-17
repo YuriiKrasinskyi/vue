@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <style>
+      .correct {
+         border: 1px solid green;
+      }
+
+      .wrong {
+         border: 1px solid red;
+      }
+   </style>
+</head>
+
+<body>
+   Задача 3. Елемент тренажера англійської. Виводимо зображення елемента і слово. Користувач вводить відповідь. Якщо
+   вірно – відтворюємо фразу «Добре. Молодець!» (і додаємо зелену рамку до елемента), якщо ні - то відтворюємо фразу
+   «Невірно, спробуйте ще раз» (і додаємо червону рамку).
+
+
+   <div id="app">
+      <div :class="border">
+         <div v-for="(book, index) in englishWordsList" :key="index">
+            <div>
+               <img :src="book.imageSrc" alt="Image" width="300">
+            </div>
+            <p>{{book.word}}</p>
+            <input type="text" v-model="userAnswer">
+            <button @click="isCorrect">Перевірити</button>
+            <p>{{infoMessage}}</p>
+         </div>
+      </div>
+   </div>
+
+   <script>
+      const { createApp } = Vue
+
+      const englishWords = [
+         {
+            imageSrc: 'https://www.stiystil.com.ua/wp-content/uploads/2021/04/black-mech-scaled-696x532.jpg',
+            word: 'table',
+            translate: 'стіл',
+         },
+      ]
+      const app = createApp({
+         data() {
+            return {
+               userAnswer: '',
+               infoMessage: '',
+               border: '',
+            }
+         },
+         computed: {
+            englishWordsList() {
+               return englishWords
+            },
+         },
+         methods: {
+            isCorrect() {
+               if (!this.userAnswer) {
+                  this.infoMessage = 'Введіть переклад'
+                  return
+               }
+               let userAnswer = this.englishWordsList.find((el) => el.translate === this.userAnswer)
+               if (userAnswer) {
+                  this.infoMessage = 'Добре. Молодець!'
+                  this.border = 'correct'
+               }
+               else {
+                  this.infoMessage = 'Невірно, спробуйте ще раз'
+                  this.border = 'wrong'
+               }
+            },
+         },
+      }).mount('#app')
+   </script>
+</body>
+
+</html>

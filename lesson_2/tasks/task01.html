@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <style>
+      .error-message-ivan {
+         color: blue;
+      }
+
+      .error-some-user {
+         color: red;
+      }
+
+      .site {
+         color: lightcoral;
+         font-size: 30;
+      }
+   </style>
+</head>
+
+<body>
+   Задача 1. Вводимо логіна і пароль. Якщо логін вірний відображаємо смайл. Якщо ні, то:
+   1) якщо логін = Іван – колір повідомлення про помилку синій
+   2) якщо хтось інший, то колір повідомлення червоний
+
+
+   <section id="app">
+      <form action="#">
+         <div>
+            <label>
+               Login
+               <input type="text" v-model.lazy.trim="userLogin">
+            </label>
+         </div>
+         <div>
+            <label>
+               Password
+               <input type="password" v-model.lazy.trim="userPassword">
+            </label>
+         </div>
+         <button @click="userLoginStatus()">Go</button>
+         <div :class="{[isIvan] : isValid}">
+            {{message}}
+         </div>
+         <div>
+            <img v-if="showImage" src="img/task01/01.jpeg" alt="Smile">
+         </div>
+      </form>
+
+   </section>
+
+   <script>
+      const { createApp } = Vue
+
+      const userInfo = [
+         {
+            login: 'anna',
+            password: '1111',
+         },
+         {
+            login: 'bogdan',
+            password: '1111',
+         },
+         {
+            login: 'yurii',
+            password: '1111',
+         },
+         {
+            login: 'petro',
+            password: '1111',
+         },
+      ]
+
+      const app = createApp({
+         data() {
+            return {
+               userLogin: null,
+               userPassword: null,
+               message: null,
+               showImage: null,
+               color: null,
+            }
+         },
+         computed: {
+            isValid() {
+               return this.userLogin && this.userPassword
+            },
+            isIvan() {
+               return this.userLogin === 'Іван' ? 'error-message-ivan' : 'error-some-user'
+            },
+         },
+         methods: {
+            userLoginStatus() {
+               if (!this.isValid) {
+                  this.message = 'Не згадаєте логін чи пароль?'
+                  return
+               }
+               const userLowerCase = this.userLogin.toLowerCase()
+               let user = userInfo.find((el) => el.login === userLowerCase && el.password === this.userPassword)
+               if (user) {
+                  this.showImage = true
+                  this.userLogin = ''
+                  this.userPassword = ''
+                  this.message = ''
+               }
+               else {
+                  this.message = 'Error'
+                  this.showImage = false
+               }
+            },
+         },
+      }).mount('#app')
+   </script>
+
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hola</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <style>
+      .button {
+         padding: 5px 15px;
+         cursor: pointer;
+      }
+
+      .main__form {}
+
+      .form {
+         margin-bottom: 20px;
+      }
+
+      .form__label {}
+
+      .form__input {}
+
+      .form__button {}
+
+      .container {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         border: 1px solid grey;
+      }
+
+      .container__item {
+         border: 1px solid grey;
+      }
+
+      .container__title {
+         text-align: center;
+      }
+
+      .container__order {
+         border: 1px solid grey;
+      }
+
+      .order-container {
+         display: flex;
+         /* align-items: center; */
+         justify-content: space-between;
+      }
+
+      .order-container__title {}
+
+      .order-container__button {}
+   </style>
+</head>
+
+
+<body>
+   Задача 6. Задача. На кухню поступають замовлення. Спочатку ми додаємо їх у список “Очікують на виконання”, якщо повар
+   береться робити — замовлення переходить у список “Виконуються”, якщо замовлення виконано — переходить у список
+   “Готові до виносу”. Якщо натиснути на “Подано” - страва зникає з таблиці
+
+
+   <div id="app" class="main">
+      <form action="#" class="main__form form">
+         <label class="form__label">
+            Нова замовлена страва:
+            <input type="text" class="form__input" v-model="orderName">
+         </label>
+         <button @click="onAddOrder" class="form__button button">Додати</button>
+      </form>
+      <div class="main__container container">
+         <div class="container__item">
+            <h3 class="container__title">Очікують на виконання</h3>
+            <div v-for="(order,index) in waitingList" :key="index" class="container__order order-container">
+               <h4 class="order-container__title">{{order}}</h4>
+               <button @click="onAddProcessing(index)" class="order-container__button button">Готувати</button>
+            </div>
+         </div>
+         <div class="container__item">
+            <h3 class="container__title">Виконуюються</h3>
+            <div v-for="(order,index) in processingList" :key="index" class="container__order order-container">
+               <h4 class="order-container__title">{{order}}</h4>
+               <button class="order-container__button button" @click="onAddSupply(index)">Приготовлено</button>
+            </div>
+         </div>
+         <div class="container__item">
+            <h3 class="container__title">Готові до виносу</h3>
+            <div v-for="(order,index) in completedList" :key="index" class="container__order order-container">
+               <h4 class="order-container__title">{{order}}</h4>
+               <button class="order-container__button button" @click="onAddServes(index)">Подано</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <script>
+      const { createApp } = Vue
+
+      const app = createApp({
+         data() {
+            return {
+               orderName: null,
+               waitingList: [],
+               processingList: [],
+               completedList: [],
+            }
+         },
+         computed: {
+         },
+         methods: {
+            onAddOrder() {
+               if (this.orderName) {
+                  this.waitingList.push(this.orderName)
+                  this.orderName = ''
+                  console.log(this.waitingList);
+               }
+            },
+            onAddProcessing(index) {
+               this.processingList.push(this.waitingList[index])
+               console.log(this.processingList);
+               this.waitingList.splice(index, 1)
+            },
+            onAddSupply(index) {
+               this.completedList.push(this.processingList[index])
+               console.log(this.completedList);
+               this.processingList.splice(index, 1)
+            },
+            onAddServes(index) {
+               this.completedList.splice(index, 1)
+            }
+         }
+      }).mount('#app')
+   </script>
+</body>
+
+</html>
