@@ -32,7 +32,7 @@
             </div>
             <p>{{book.word}}</p>
             <input type="text" v-model="userAnswer">
-            <button @click="isCorrect">Перевірити</button>
+            <button @click="isCorrect" :disabled="!userAnswer">Перевірити</button>
             <p>{{infoMessage}}</p>
          </div>
       </div>
@@ -63,10 +63,6 @@
          },
          methods: {
             isCorrect() {
-               if (!this.userAnswer) {
-                  this.infoMessage = 'Введіть переклад'
-                  return
-               }
                let userAnswer = this.englishWordsList.find((el) => el.translate === this.userAnswer)
                if (userAnswer) {
                   this.infoMessage = 'Добре. Молодець!'

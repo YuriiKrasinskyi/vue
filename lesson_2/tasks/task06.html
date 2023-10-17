@@ -73,23 +73,23 @@
       <div class="main__container container">
          <div class="container__item">
             <h3 class="container__title">Очікують на виконання</h3>
-            <div v-for="(order,index) in waitingList" :key="index" class="container__order order-container">
+            <div v-for="(order,id) in waitingList" :key="id" class="container__order order-container">
                <h4 class="order-container__title">{{order}}</h4>
-               <button @click="onAddProcessing(index)" class="order-container__button button">Готувати</button>
+               <button @click="onAddProcessing(id)" class="order-container__button button">Готувати</button>
             </div>
          </div>
          <div class="container__item">
             <h3 class="container__title">Виконуюються</h3>
-            <div v-for="(order,index) in processingList" :key="index" class="container__order order-container">
+            <div v-for="(order,id) in processingList" :key="id" class="container__order order-container">
                <h4 class="order-container__title">{{order}}</h4>
-               <button class="order-container__button button" @click="onAddSupply(index)">Приготовлено</button>
+               <button class="order-container__button button" @click="onAddSupply(id)">Приготовлено</button>
             </div>
          </div>
          <div class="container__item">
             <h3 class="container__title">Готові до виносу</h3>
-            <div v-for="(order,index) in completedList" :key="index" class="container__order order-container">
+            <div v-for="(order,id) in completedList" :key="id" class="container__order order-container">
                <h4 class="order-container__title">{{order}}</h4>
-               <button class="order-container__button button" @click="onAddServes(index)">Подано</button>
+               <button class="order-container__button button" @click="onAddServes(id)">Подано</button>
             </div>
          </div>
       </div>
