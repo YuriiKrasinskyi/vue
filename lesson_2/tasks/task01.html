@@ -34,16 +34,16 @@
          <div>
             <label>
                Login
-               <input type="text" v-model.lazy.trim="userLogin">
+               <input type="text" v-model.trim="userLogin">
             </label>
          </div>
          <div>
             <label>
                Password
-               <input type="password" v-model.lazy.trim="userPassword">
+               <input type="password" v-model.trim="userPassword">
             </label>
          </div>
-         <button @click="userLoginStatus()">Go</button>
+         <button @click="userLoginStatus()" :disabled="!isValid">Go</button>
          <div :class="{[isIvan] : isValid}">
             {{message}}
          </div>
@@ -96,10 +96,6 @@
          },
          methods: {
             userLoginStatus() {
-               if (!this.isValid) {
-                  this.message = 'Не згадаєте логін чи пароль?'
-                  return
-               }
                const userLowerCase = this.userLogin.toLowerCase()
                let user = userInfo.find((el) => el.login === userLowerCase && el.password === this.userPassword)
                if (user) {
