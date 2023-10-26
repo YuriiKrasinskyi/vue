@@ -1,10 +1,10 @@
 <template>
   <div class="box">
     <div>
-      <athletes-panel :athletes-list-data="athletesList" @add="selectAddAthlete" />
+      <athletes-panel :athletes-list-data="athletesList" @add="AddOnSelectList" />
     </div>
     <div>
-      <selected-athletes-panel :selected-athletes-data-list="selectedAthletesList" @delete="deleteAthlete" />
+      <selected-athletes-panel :selected-athletes-data-list="selectedAthletesList" @delete="removeFromSelectList" />
     </div>
   </div>
 </template>
@@ -32,15 +32,15 @@ export default {
     }
   },
   methods: {
-    getAthlete(athleteID) {
+    getAthleteById(athleteID) {
       const athlete = athletesList.find(athlete => athlete.id === athleteID)
       return athlete
     },
-    selectAddAthlete(athleteID) {
+    AddOnSelectList(athleteID) {
       this.selectedAthletesList.push(this.getAthlete(athleteID))
       this.athletesList = this.athletesList.filter((el) => el.id !== athleteID)
     },
-    deleteAthlete(athleteID) {
+    removeFromSelectList(athleteID) {
       this.athletesList.push(this.getAthlete(athleteID))
       this.selectedAthletesList = this.selectedAthletesList.filter((el) => el.id !== athleteID)
     },
